@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, '../jsx/parts'),
-    filename: 'funcs.js'
+    path: path.resolve(__dirname, '../jsx'),
+    filename: 'transpiled.js'
   },
   module: {
     rules: [
