@@ -1,5 +1,18 @@
 # Example of ExtendScript based on Modern JavaScript
 
+## what is used
+**CEP panel**
+1. React
+2. TypeScript
+3. Eslint
+4. Webpack
+5. Babel
+
+**ExtendScript**
+1. Webpack
+2. TypeScript
+3. Babel
+
 ## This is Extension on Illustrator.
 The Extension shows you how to develop ExtendScript with modern Javascript.
 As you know ExtendScript the system is based on ECMA3 which is obsolete Javascript.
@@ -76,3 +89,10 @@ const loadJsx = () =>{
  ` ` `
 
  it loads ExtendScript from global scope.(that why I registered branch function on global scope)
+
+### debug level
+ExtendScript debugger requires declaration of debug level in ExtendScript.
+
+ ` ` `
+$.level = 1;
+ ` ` `
