@@ -13,8 +13,14 @@
 2. TypeScript
 3. Babel
 
+## features of Extension
+
+The Extension just takes documents and layers parts of data.
+And it shows on panel. it doesn't have any special feature because this is an exmaple of
+code.
+
 ## This is Extension on Illustrator.
-The Extension shows you how to develop ExtendScript with modern Javascript.
+The Extension shows how to develop ExtendScript with modern Javascript.
 As you know ExtendScript the system is based on ECMA3 which is obsolete Javascript.
 The more you develop , the more you feel inconvenience.
 Especially ExtendScript pollutes variable scope easily.
