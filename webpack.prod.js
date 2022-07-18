@@ -21,7 +21,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      DEBUG: false
+      ISDEVELOP: false
     })
   ]
 });

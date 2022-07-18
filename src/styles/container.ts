@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
+/**
+ * base layout object which defines gridlayout
+*/
 export const MainContainer = {
   Container: styled.div`
+    width: 100%;
+    height: 100vh;
+    background: #1F2643;
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
@@ -16,9 +22,9 @@ export const MainContainer = {
   `,
   Main: styled.main`
     grid-area: main;
-    overflow: scroll;
+    overflow-y: scroll;
   `,
-  footer: styled.footer`
+  Footer: styled.footer`
     grid-area: footer;
     background: #414d8d;
   `

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --config ./webpack.dev.js",
+    "watch": "webpack -w --config ./webpack.dev.js",
+    "prod": "webpack --config ./webpack.prod.js"
   },
   "keywords": [],
   "author": "",

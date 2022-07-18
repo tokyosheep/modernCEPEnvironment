@@ -12,7 +12,7 @@ const Wrapper = styled.li`
   background: #5b578b;
   box-shadow: 3px 3px 3px rgba(0,0,0,0.3) inset;
   border-radius: 5px;
-  border-bottom: 10px;
+  margin-bottom: 10px;
 `;
 
 const DocumentTitle = styled.span`

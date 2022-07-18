@@ -11,12 +11,12 @@
 			Make sure to change these tags to use realistic version ranges before releasing your extensions, not 99.9!
 			You may also need to change the CEP version in order to support certain apps. -->
             
-            <!-- Photoshop -->
+            <!-- Photoshop 	
             <Host Name="PHXS" Version="[16.0,99.9]" />
             <Host Name="PHSP" Version="[16.0,99.9]" />
-            
+			-->
             <!-- Illustrator -->
-            <!-- <Host Name="ILST" Version="[18.0,99.9]" /> -->
+            <Host Name="ILST" Version="[18.0,99.9]" />
             
             <!-- InDesign -->
             <!-- <Host Name="IDSN" Version="[10.0,99.9]" /> -->
@@ -56,6 +56,10 @@
 				<Resources>
 				<MainPath>./index.html</MainPath>
 				<ScriptPath>./jsx/hostscript.jsx</ScriptPath>
+				<CEFCommandLine>   
+                    <Parameter>--enable-nodejs</Parameter>  
+                    <Parameter>--mixed-context</Parameter>  
+				</CEFCommandLine>
 				</Resources>
 				<Lifecycle>
 					<AutoVisible>true</AutoVisible>
@@ -65,8 +69,8 @@
 					<Menu>modernCEPEnvironment</Menu>
 					<Geometry>
 						<Size>
-							<Height>300</Height>
-							<Width>300</Width>
+							<Height>500</Height>
+							<Width>400</Width>
 						</Size>
                     <!--<MinSize>
                             <Height>550</Height>

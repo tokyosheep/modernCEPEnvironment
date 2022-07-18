@@ -26,4 +26,3 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error']
   }
 };
-  

@@ -2,6 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { DocumentType } from '../../types/documentType';
 
+/**
+ * redux shares object which has document and layer data on Illustrator
+ */
+
 interface DocumentsSlice {
     value: DocumentType[]
 };
@@ -14,6 +18,9 @@ const documentSlice = createSlice({
   name: 'documents',
   initialState,
   reducers: {
+    /**
+     * loading document and layer object
+     */
     setDocs: (state, action: PayloadAction<DocumentType[]>) => {
       state.value = [...action.payload];
     }

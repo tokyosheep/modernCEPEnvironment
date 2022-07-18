@@ -13,7 +13,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [['@babel/preset-env', { loose: true, modules: 'commonjs' }], '@babel/preset-typescript'],
-          plugins: ['@babel/plugin-transform-object-assign'] // needed for fast-xml-parser
+          plugins: ['@babel/plugin-transform-object-assign']
         }
       }
     ]

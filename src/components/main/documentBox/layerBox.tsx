@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { LayerType } from '../../../redux/types/documentType';
 
 const Wrapper = styled.li`
-    width: 80%;
+    width: 90%;
     min-height: 30px;
     height: auto;
     display: flex;
@@ -12,6 +12,7 @@ const Wrapper = styled.li`
     background: #383d5c;
     padding: 5px;
     box-sizing: border-box;
+    margin-bottom: 5px;
 `;
 
 const LayerTitle = styled.span`

@@ -1,0 +1,78 @@
+# Example of ExtendScript based on Modern JavaScript
+
+## This is Extension on Illustrator.
+The Extension shows you how to develop ExtendScript with modern Javascript.
+As you know ExtendScript the system is based on ECMA3 which is obsolete Javascript.
+The more you develop , the more you feel inconvenience.
+Especially ExtendScript pollutes variable scope easily.
+Webpack solves those problems, and TypeScript stabilizes code between 
+CEP panel and ExtendScript.
+
+## How this environment is developed.
+I used npm package Webpack , Babel, Typescript.
+Webpack complies ExtendScripts, and Babel transpiles from ES2015 to ES3, and you may know
+Typescript paves way on your codes.
+ECMA3 needs some polyfill even after Babel transplied Modern Javascript, like
+extendscript-es5-shim, json2.
+
+### CEP only can load global scope function
+
+CEP can excute ExtendScript function but only it can excute global scope function.
+So It must be declared on global scope but global scope should be prevent from variable pollution.
+That why I declared only branch function on global scope that branchs to each function.
+like below.
+
+ ` ` ` 
+const switchFuncs = () => {
+    /* branch to each local function */
+}
+$.global.switchFuncs = switchFuncs;
+ ` ` ` 
+
+But you are not supposed to declare other global variable except it. and Webpack covers local scope any function , variable , object.
+
+### Report.log
+
+in Webpack environment, the variable is declared like this.
+
+ ` ` ` 
+plugins: [
+   new webpack.DefinePlugin({
+       ISDEVELOP: true
+   })
+]
+ ` ` ` 
+
+ISDEVELOP variable has boolean value , under development environment,
+it'll be true.
+and under production environment, it'll be false.
+I use report.log method instead of $.writeln method directly.
+it writes console only under development environment because it detects ISDEVELOP environment.
+
+### Init reload event
+Illustrator Extension doen't reload code untill you restart application.
+After you modify code, you have to reastart it and again and again.
+It's obviously wasting time.
+So I register window(csinteface) event.
+
+ ` ` `
+const reload = () =>{
+    csInterface.addEventListener("com.adobe.csxs.events.WindowVisibilityChanged",()=>{location.reload(true)},false);
+}
+ ` ` `
+
+once you close and open panel, it reloads code. you don't need reastrt application.(but after catching error on CEP panel without try and catch , it won't reload)
+
+### HostScript
+host ExtendScript registered on manifest.xml won't be reload even you register reload event.
+if you want to reload ExtendScript again with the event, try to load ExtendScriot through csinterface.eval method not as a host script.
+
+ ` ` `
+ export const csInterface = new CSInterface();
+export const extensionRoot = csInterface.getSystemPath(SystemPath.EXTENSION) + '/jsx/';
+const loadJsx = () =>{
+    csInterface.evalScript(`$.evalFile("${extensionRoot}/transpiled.js")`);
+};
+ ` ` `
+
+ it loads ExtendScript from global scope.(that why I registered branch function on global scope)
