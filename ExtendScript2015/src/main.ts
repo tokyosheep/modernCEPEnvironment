@@ -6,7 +6,7 @@ import report from './log';
 report.log('hello');
 
 const greeting:(msg:string)=>void = (msg) => {
-    $.writeln('greeting');
+    report.log('greeting');
     alert(msg);
 };
 
@@ -49,15 +49,15 @@ const switchFuncs:(arg:HostScriptArg)=>boolean|string = arg => {
  */
 const doSomething = (msg) => {
   $.level = 1;
-  $.writeln('doing');
-  $.writeln(msg);
+  report.log('doing');
+  report.log(msg);
   alert('good day');
 }
 
 /*
 declared in global scope
 because it must be called from CEP panel.
-except functions below, webpack covers any variant, function, object under local scope.
+except functions below, webpack covers any variable, function, object under local scope.
 */
 $.global.doSomething = doSomething;
 $.global.switchFuncs = switchFuncs;

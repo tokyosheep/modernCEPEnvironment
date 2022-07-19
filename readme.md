@@ -19,15 +19,15 @@ The Extension just takes documents and layers parts of data.
 And it shows on panel. it doesn't have any special feature because this is an exmaple of
 code.
 
-## This is Extension on Illustrator.
-The Extension shows how to develop ExtendScript with modern Javascript.
+## The purpose to published the code
+The code shows how to develop ExtendScript with modern Javascript.
 As you know ExtendScript the system is based on ECMA3 which is obsolete Javascript.
 The more you develop , the more you feel inconvenience.
 Especially ExtendScript pollutes variable scope easily.
 Webpack solves those problems, and TypeScript stabilizes code between 
 CEP panel and ExtendScript.
 
-## How this environment is developed.
+## How this environment is developed
 I used npm package Webpack , Babel, Typescript.
 Webpack complies ExtendScripts, and Babel transpiles from ES2015 to ES3, and you may know
 Typescript paves way on your codes.
