@@ -17,8 +17,16 @@
             "name": "[launch] illustrator in ExtendScript Engine",
             "bringToFront": true,
             "hostAppSpecifier": "illustrator",
-            "engineName": "main",
+            "engineName": "transient",
             "script": "${workspaceFolder}/jsx/transpiled.js"
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "[launch] illustrator in active ExtendScript Engine",
+            "bringToFront": true,
+            "hostAppSpecifier": "illustrator",
+            "engineName": "transient"
         },
         {
             "type": "extendscript-debug",

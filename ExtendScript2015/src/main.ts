@@ -1,5 +1,7 @@
 import 'extendscript-es5-shim';
-import '../json2';
+import '../polyfill/json2';
+import '../polyfill/padStart';// padstart polyfill
+import '../polyfill/trunc';// Math.trunc
 import getDocumentData from './getDocuments';
 import report from './log';
 
@@ -52,6 +54,13 @@ const doSomething = (msg) => {
   report.log('doing');
   report.log(msg);
   alert('good day');
+};
+
+const test = () => {
+  const n = '5';
+  report.log(100);
+  report.log(n.padStart(2, '0'));
+  report.log(Math.trunc(13.2343));
 }
 
 /*
@@ -61,3 +70,4 @@ except functions below, webpack covers any variable, function, object under loca
 */
 $.global.doSomething = doSomething;
 $.global.switchFuncs = switchFuncs;
+$.global.test = test;
