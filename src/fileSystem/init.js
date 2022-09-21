@@ -58,3 +58,11 @@ export const init = () => {
         console.log(e);
     }
 };
+
+export const alertFromJSX = msg => {
+    return new Promise(resolve => {
+        csInterface.evalScript(`$.evalFile(alert("${msg}"))`,() => {
+            resolve();
+        })
+    })
+};

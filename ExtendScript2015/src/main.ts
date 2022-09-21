@@ -3,6 +3,7 @@ import '../polyfill/json2';
 import '../polyfill/padStart';// padstart polyfill
 import '../polyfill/trunc';// Math.trunc
 import getDocumentData from './getDocuments';
+import { callDocument } from './callDocument';
 import report from './log';
 
 report.log('hello');
@@ -15,33 +16,55 @@ const greeting:(msg:string)=>void = (msg) => {
 type GreedArg = {
   func: 'greeting',
   msg: string
-}
+};
 
 type GetDocumentData = {
   func: 'getDocuments',
+};
+
+type CallDocumentArg = {
+  func: 'callDocument'
+};
+
+type ErrorFunc = {
+  func: 'error'
 }
 
-export type HostScriptArg = GreedArg|GetDocumentData;
-
+export type HostScriptArg = GreedArg|GetDocumentData|CallDocumentArg|ErrorFunc;
+export type HostScriptFunc = (arg:HostScriptArg)=>string;
 /**
  * this is function on top level scope.
  * any function must not be declared on global scope.
  * @param {HostScriptArg} arg 
- * @returns {boolean|string}
+ * @returns {null | string | Error} 
  * branch to each local function.
+ * 
+ * I warn you
+ * any value will be string type on CEP Panel which comes from ExtendScript.
  */
-const switchFuncs:(arg:HostScriptArg)=>boolean|string = arg => {
+const switchFuncs:HostScriptFunc = arg => {
   report.log(arg.func);
   switch(arg.func){
     case 'greeting':
       greeting(arg.msg);
-      return true;
+      return 'null';
 
     case 'getDocuments':
-      return JSON.stringify(getDocumentData());
+      try {
+        return JSON.stringify(getDocumentData());
+      } catch (e) {
+        alert(e);
+        return 'null';
+      };
+
+    case 'callDocument':
+      return callDocument();
+
+    case 'error':
+      return JSON.stringify(new Error('error'));// this just returns raw code
 
     default:
-      return false;
+      return new Error('invalid param').toString();
   }
 };
 

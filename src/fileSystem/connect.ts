@@ -1,6 +1,6 @@
 import { csInterface } from './init';
-import { HostScriptArg } from '../../ExtendScript2015/src/main';
-
+import { HostScriptArg, HostScriptFunc } from '../../ExtendScript2015/src/main';
+type ReturnFromHost = ReturnType<HostScriptFunc>;
 /**
  * just call dosomething function from ExtendScript
  */
@@ -14,11 +14,8 @@ export const dosomething = () => {
 
 export interface HostObj{
     jsx:string,
-    callHostScript:(obj:HostScriptArg)=>Promise<string|boolean>
+    callHostScript:(obj:HostScriptArg)=>Promise<ReturnFromHost>
 };
-
-type Return = string|boolean;
-
 /*
 this calss connects to host ExtendScript
 */
@@ -30,11 +27,11 @@ export class SendHostScript implements HostObj {
 
   /**
   * @param {HostScriptArg} send to ExtendScript as a parameter
-  * @return {Promise<string|boolean>} just boolean or JSON.
+  * @return {Promise<ReturnFromHost>} just boolean or JSON.
   */
-  callHostScript (obj:HostScriptArg):Promise<string|boolean> {
+  callHostScript (obj:HostScriptArg):Promise<ReturnFromHost> {
     return new Promise((resolve) => {
-      csInterface.evalScript(`${this.jsx}(${obj !== undefined ? JSON.stringify(obj) : ''})`, (o:Return) => {
+      csInterface.evalScript(`${this.jsx}(${obj !== undefined ? JSON.stringify(obj) : ''})`, (o:ReturnFromHost) => {
         resolve(o);
       });
     });

@@ -2642,12 +2642,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
 /* harmony import */ var _redux_features_documents_documentsSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/features/documents/documentsSlice */ "./src/redux/features/documents/documentsSlice.ts");
 /* harmony import */ var _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../fileSystem/connect */ "./src/fileSystem/connect.ts");
 /* harmony import */ var _parts_buttons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../parts/buttons */ "./src/parts/buttons.tsx");
 /* harmony import */ var _styles_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../styles/container */ "./src/styles/container.ts");
 /* harmony import */ var _redux_app_hooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/app/hooks */ "./src/redux/app/hooks.ts");
+/* harmony import */ var _fileSystem_init__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../fileSystem/init */ "./src/fileSystem/init.js");
+
 
 
 
@@ -2658,11 +2660,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Header = _styles_container__WEBPACK_IMPORTED_MODULE_6__.MainContainer.Header;
-var Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div.withConfig({
+var Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].div.withConfig({
   displayName: "header__Wrapper",
   componentId: "sc-nfjpma-0"
 })(["display:flex;justify-content:space-between;padding:5px;align-items:5px;"]);
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].span.withConfig({
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].span.withConfig({
   displayName: "header__Title",
   componentId: "sc-nfjpma-1"
 })(["color:#fff;font-size:15px;display:block;"]);
@@ -2670,23 +2672,26 @@ var Title = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].span.withC
 var HeaderCompo = function HeaderCompo() {
   var dispatch = (0,_redux_app_hooks__WEBPACK_IMPORTED_MODULE_7__.useAppDispatch)();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(Header, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(Wrapper, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(Title, null, "documents"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
-    name: "greet",
+    name: "error",
     func: /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
       var connect, n;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              /**
+               * just receive the Error, I wanted to try.
+               * that all
+               */
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
               _context.next = 3;
               return connect.callHostScript({
-                func: 'greeting',
-                msg: 'hello from CEP'
+                func: 'error'
               });
 
             case 3:
               n = _context.sent;
-              console.log(n);
+              console.log(JSON.stringify(n)); // this is pointless
 
             case 5:
             case "end":
@@ -2696,9 +2701,17 @@ var HeaderCompo = function HeaderCompo() {
       }, _callee);
     }))
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
-    name: "load",
-    func: /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2() {
-      var connect, n, docs;
+    name: "call doc",
+    func:
+    /*#__PURE__*/
+
+    /**
+     * call document name
+     * if there's no any document on hostAppliction,
+     * it returns error
+     */
+    _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2() {
+      var connect, n;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -2706,30 +2719,102 @@ var HeaderCompo = function HeaderCompo() {
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
               _context2.next = 3;
               return connect.callHostScript({
-                func: 'getDocuments'
+                func: 'callDocument'
               });
 
             case 3:
               n = _context2.sent;
+              console.log(n);
 
-              if (!(typeof n !== 'string')) {
-                _context2.next = 6;
-                break;
-              }
-
-              return _context2.abrupt("return");
-
-            case 6:
-              docs = JSON.parse(n);
-              console.log(docs);
-              dispatch((0,_redux_features_documents_documentsSlice__WEBPACK_IMPORTED_MODULE_3__.setDocs)(docs));
-
-            case 9:
+            case 5:
             case "end":
               return _context2.stop();
           }
         }
       }, _callee2);
+    }))
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
+    name: "greet",
+    func:
+    /*#__PURE__*/
+
+    /**
+    * example of call ExtendScript from hostScript
+    * and send message
+    * result is just calling message on ExtendScript that all.
+    */
+    _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3() {
+      var connect, n;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
+              _context3.next = 3;
+              return connect.callHostScript({
+                func: 'greeting',
+                msg: 'hello from CEP'
+              });
+
+            case 3:
+              n = _context3.sent;
+              console.log(n);
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
+    name: "load",
+    func:
+    /*#__PURE__*/
+
+    /**
+     * loading documents annd layers data from ExtendScript.
+     * and showing on panel
+     * @returns {DocumentType[]}
+     */
+    _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4() {
+      var connect, n, docs;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
+              _context4.next = 3;
+              return connect.callHostScript({
+                func: 'getDocuments'
+              });
+
+            case 3:
+              n = _context4.sent;
+
+              if (!(n === 'null')) {
+                _context4.next = 8;
+                break;
+              }
+
+              _context4.next = 7;
+              return (0,_fileSystem_init__WEBPACK_IMPORTED_MODULE_8__.alertFromJSX)('error');
+
+            case 7:
+              return _context4.abrupt("return");
+
+            case 8:
+              docs = JSON.parse(n);
+              console.log(docs); // send to redux
+
+              dispatch((0,_redux_features_documents_documentsSlice__WEBPACK_IMPORTED_MODULE_3__.setDocs)(docs));
+
+            case 11:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
     }))
   })));
 };
@@ -2891,11 +2976,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * just call dosomething function from ExtendScript
+ */
 var dosomething = function dosomething() {
+  /**
+   * @param {string} this is just parameter to send ExtendScript
+   */
   var msg = 'good bye';
   _init__WEBPACK_IMPORTED_MODULE_3__.csInterface.evalScript("doSomething(\"".concat(msg, "\");"));
 };
 ;
+/*
+this calss connects to host ExtendScript
+*/
+
 var SendHostScript = /*#__PURE__*/function () {
   function SendHostScript() {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, SendHostScript);
@@ -2904,6 +3000,11 @@ var SendHostScript = /*#__PURE__*/function () {
 
     this.jsx = 'hostScript';
   }
+  /**
+  * @param {HostScriptArg} send to ExtendScript as a parameter
+  * @return {Promise<ReturnFromHost>} just boolean or JSON.
+  */
+
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(SendHostScript, [{
     key: "callHostScript",
@@ -3061,6 +3162,9 @@ var documentSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice
   name: 'documents',
   initialState: initialState,
   reducers: {
+    /**
+     * loading document and layer object
+     */
     setDocs: function setDocs(state, action) {
       state.value = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(action.payload);
     }
@@ -3087,6 +3191,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MainContainer": () => (/* binding */ MainContainer)
 /* harmony export */ });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+
+/**
+ * base layout object which defines gridlayout
+*/
 
 var MainContainer = {
   Container: styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
@@ -40326,6 +40434,7 @@ if (false) {} else {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "alertFromJSX": () => (/* binding */ alertFromJSX),
 /* harmony export */   "csInterface": () => (/* binding */ csInterface),
 /* harmony export */   "extensionId": () => (/* binding */ extensionId),
 /* harmony export */   "extensionRoot": () => (/* binding */ extensionRoot),
@@ -40336,9 +40445,17 @@ const csInterface = new CSInterface();
 const extensionId = csInterface.getExtensionID();
 const extensionRoot = csInterface.getSystemPath(SystemPath.EXTENSION) + '/jsx/';
 
+/** 
+ * register event on Window.
+ * once panel closed or opened, it reloads.
+*/
 const reload = () =>{
     csInterface.addEventListener("com.adobe.csxs.events.WindowVisibilityChanged",()=>{location.reload(true)},false);
 }
+
+/**
+ * prevent dragging image file on panel accidentally
+ */
 
 const preventDragEvent = () =>{
     window.addEventListener('drop' ,preventDragnaddrop,false);
@@ -40351,15 +40468,30 @@ const preventDragEvent = () =>{
     }
 };
 
+/**
+ * load ExtendScript Webpack transpiled.
+ * reloaded it once you closed and opned panel.
+ */
 const loadJsx = () =>{
     csInterface.evalScript(`$.evalFile("${extensionRoot}transpiled.js")`);
 };
 
+/**
+ * 
+ * @param {Object} obj something you wnat to send to ExtendScript as a parameter 
+ * this time I don't use this.
+ * it writes Object as a JSON file.
+ * if you want check parameter as a json file,
+ * this may be usefull
+ */
 const writeDebugData = obj =>{
     if(false){}
     fs.writeFileSync(`${extensionRoot}/data.json`,JSON.stringify(obj));
 }
 
+/** 
+ *load ExtendScript and register window event
+*/
 const init = () => {
     try{
         preventDragEvent();
@@ -40368,6 +40500,14 @@ const init = () => {
     }catch (e) {
         console.log(e);
     }
+};
+
+const alertFromJSX = msg => {
+    return new Promise(resolve => {
+        csInterface.evalScript(`$.evalFile(alert("${msg}"))`,() => {
+            resolve();
+        })
+    })
 };
 
 /***/ }),
@@ -41307,6 +41447,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * I developed example of Extension based on React
+ * but you don't have to know React.
+ * if you want to know how to connect ExtendScript, see intt.js , connect.ts , header.tsx
+ */
 
 var GlobalStyle = (0,styled_components__WEBPACK_IMPORTED_MODULE_5__.createGlobalStyle)(["body{margin:0;font-family:\"Helvetica Neue\",Helvetica,Arial,Verdana,Roboto,\"\u6E38\u30B4\u30B7\u30C3\u30AF\",\"Yu Gothic\",\"\u6E38\u30B4\u30B7\u30C3\u30AF\u4F53\",\"YuGothic\",\"\u30D2\u30E9\u30AE\u30CE\u89D2\u30B4 Pro W3\",\"Hiragino Kaku Gothic Pro\",\"Meiryo UI\",\"\u30E1\u30A4\u30EA\u30AA\",Meiryo,\"\uFF2D\uFF33 \uFF30\u30B4\u30B7\u30C3\u30AF\",\"MS PGothic\",sans-serif;background:#1F2643;overflow:hidden;}"]);
 var container = document.getElementById('root');

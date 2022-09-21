@@ -1,6 +1,32 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/callDocument.ts":
+/*!*****************************!*\
+  !*** ./src/callDocument.ts ***!
+  \*****************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.callDocument = void 0;
+
+var callDocument = function callDocument() {
+  if (app.documents.length < 1) {
+    alert("there's no any document");
+    return new Error("there's no any document").toString();
+  }
+
+  alert(app.activeDocument.name);
+  return decodeURI(app.activeDocument.name.toString());
+};
+
+exports.callDocument = callDocument;
+
+/***/ }),
+
 /***/ "./src/getDocuments.ts":
 /*!*****************************!*\
   !*** ./src/getDocuments.ts ***!
@@ -2098,6 +2124,7 @@ if ( true && module.exports) {
   \***************************/
 /***/ (function() {
 
+// https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
 if (!Math.trunc) {
     Math.trunc = function(v) {
       v = +v;
@@ -2168,11 +2195,14 @@ __webpack_require__(/*! ../polyfill/trunc */ "./polyfill/trunc.js");
 
 var _getDocuments = _interopRequireDefault(__webpack_require__(/*! ./getDocuments */ "./src/getDocuments.ts"));
 
+var _callDocument = __webpack_require__(/*! ./callDocument */ "./src/callDocument.ts");
+
 var _log = _interopRequireDefault(__webpack_require__(/*! ./log */ "./src/log.ts"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // padstart polyfill
+// Math.trunc
 _log["default"].log('hello');
 
 var greeting = function greeting(msg) {
@@ -2185,8 +2215,11 @@ var greeting = function greeting(msg) {
  * this is function on top level scope.
  * any function must not be declared on global scope.
  * @param {HostScriptArg} arg 
- * @returns {boolean|string}
+ * @returns {null | string | Error} 
  * branch to each local function.
+ * 
+ * I warn you
+ * any value will be string type on CEP Panel which comes from ExtendScript.
  */
 var switchFuncs = function switchFuncs(arg) {
   _log["default"].log(arg.func);
@@ -2194,13 +2227,27 @@ var switchFuncs = function switchFuncs(arg) {
   switch (arg.func) {
     case 'greeting':
       greeting(arg.msg);
-      return true;
+      return 'null';
 
     case 'getDocuments':
-      return JSON.stringify((0, _getDocuments["default"])());
+      try {
+        return JSON.stringify((0, _getDocuments["default"])());
+      } catch (e) {
+        alert(e);
+        return 'null';
+      }
+
+      ;
+
+    case 'callDocument':
+      return (0, _callDocument.callDocument)();
+
+    case 'error':
+      return JSON.stringify(new Error('error'));
+    // this just returns raw code
 
     default:
-      return false;
+      return new Error('invalid param').toString();
   }
 };
 /**
