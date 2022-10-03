@@ -34,9 +34,13 @@ const HeaderCompo = () => {
              * just receive the Error, I wanted to try.
              * that all
              */
-            const connect = new SendHostScript();
-            const n = await connect.callHostScript({ func: 'error' });
-            console.log(JSON.stringify(n));// this is pointless
+            try {
+              const connect = new SendHostScript();
+              const n = await connect.callHostScript({ func: 'error' });
+              console.log(n);// it never happens
+            } catch (e) {
+              await alertFromJSX(e);
+            }
           }
         }
         />
@@ -47,9 +51,13 @@ const HeaderCompo = () => {
            * it returns error
            */
           async () => {
-            const connect = new SendHostScript();
-            const n = await connect.callHostScript({ func: 'callDocument' });
-            console.log(n);
+            try {
+              const connect = new SendHostScript();
+              const n = await connect.callHostScript({ func: 'callDocument' });
+              console.log(n);
+            } catch (e) {
+              console.error(e);
+            }
           }
         }
         />
@@ -60,9 +68,13 @@ const HeaderCompo = () => {
           * result is just calling message on ExtendScript that all.
           */
           async () => {
-            const connect = new SendHostScript();
-            const n = await connect.callHostScript({ func: 'greeting', msg: 'hello from CEP' });
-            console.log(n);
+            try {
+              const connect = new SendHostScript();
+              const n = await connect.callHostScript({ func: 'greeting', msg: 'hello from CEP' });
+              console.log(n);
+            } catch (e) {
+              await alertFromJSX(e);
+            }
           }
         } />
         <StdButton name='load' func={
@@ -73,15 +85,16 @@ const HeaderCompo = () => {
          */
         async () => {
           const connect = new SendHostScript();
-          const n = await connect.callHostScript({ func: 'getDocuments' });
-          if (n === 'null') {
-            await alertFromJSX('error');
-            return;
+          try {
+            const docs = await connect.callHostScript({ func: 'getDocuments' });
+            console.log(docs);
+            /*
+              send to redux
+            */
+            if (docs.from === 'getDocuments')dispatch(setDocs(docs.param));
+          } catch (e) {
+            await alertFromJSX(e);
           }
-          const docs = JSON.parse(n);
-          console.log(docs);
-          // send to redux
-          dispatch(setDocs(docs));
         }} />
       </Wrapper>
     </Header>

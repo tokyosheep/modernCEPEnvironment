@@ -2599,26 +2599,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
-/* harmony import */ var _redux_app_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../redux/app/hooks */ "./src/redux/app/hooks.ts");
-/* harmony import */ var _styles_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../styles/container */ "./src/styles/container.ts");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var _redux_app_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/app/hooks */ "./src/redux/app/hooks.ts");
+/* harmony import */ var _parts_buttons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../parts/buttons */ "./src/parts/buttons.tsx");
+/* harmony import */ var _fileSystem_connect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../fileSystem/connect */ "./src/fileSystem/connect.ts");
+/* harmony import */ var _styles_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../styles/container */ "./src/styles/container.ts");
 
 
 
 
-var Footer = _styles_container__WEBPACK_IMPORTED_MODULE_2__.MainContainer.Footer;
-var FooterTitle = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].span.withConfig({
+
+
+
+
+var Footer = _styles_container__WEBPACK_IMPORTED_MODULE_6__.MainContainer.Footer;
+var FooterTitle = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].span.withConfig({
   displayName: "footer__FooterTitle",
   componentId: "sc-171x2oh-0"
 })(["color:#fff;font-size:12px;font-weight:300;"]);
 
 var FooterCompo = function FooterCompo() {
-  var documents = (0,_redux_app_hooks__WEBPACK_IMPORTED_MODULE_1__.useAppSelector)(function (state) {
+  var documents = (0,_redux_app_hooks__WEBPACK_IMPORTED_MODULE_3__.useAppSelector)(function (state) {
     return state.documents.value;
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(FooterTitle, null, documents.length, " documents"));
+
+  var inspectPolyfill = /*#__PURE__*/function () {
+    var _ref = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+      var connect, result;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_5__.SendHostScript();
+              _context.next = 4;
+              return connect.callHostScript({
+                func: 'inspectPolyfill'
+              });
+
+            case 4:
+              result = _context.sent;
+              console.log(result.param);
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function inspectPolyfill() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(FooterTitle, null, documents.length, " documents"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_4__.StdButton, {
+    name: "polyfill",
+    func: inspectPolyfill
+  }));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FooterCompo);
@@ -2679,26 +2731,32 @@ var HeaderCompo = function HeaderCompo() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              /**
-               * just receive the Error, I wanted to try.
-               * that all
-               */
+              _context.prev = 0;
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
-              _context.next = 3;
+              _context.next = 4;
               return connect.callHostScript({
                 func: 'error'
               });
 
-            case 3:
+            case 4:
               n = _context.sent;
-              console.log(JSON.stringify(n)); // this is pointless
+              console.log(n); // it never happens
 
-            case 5:
+              _context.next = 12;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              _context.next = 12;
+              return (0,_fileSystem_init__WEBPACK_IMPORTED_MODULE_8__.alertFromJSX)(_context.t0);
+
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[0, 8]]);
     }))
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
     name: "call doc",
@@ -2716,22 +2774,30 @@ var HeaderCompo = function HeaderCompo() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              _context2.prev = 0;
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
-              _context2.next = 3;
+              _context2.next = 4;
               return connect.callHostScript({
                 func: 'callDocument'
               });
 
-            case 3:
+            case 4:
               n = _context2.sent;
               console.log(n);
+              _context2.next = 11;
+              break;
 
-            case 5:
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+
+            case 11:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2);
+      }, _callee2, null, [[0, 8]]);
     }))
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
     name: "greet",
@@ -2749,23 +2815,32 @@ var HeaderCompo = function HeaderCompo() {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              _context3.prev = 0;
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
-              _context3.next = 3;
+              _context3.next = 4;
               return connect.callHostScript({
                 func: 'greeting',
                 msg: 'hello from CEP'
               });
 
-            case 3:
+            case 4:
               n = _context3.sent;
               console.log(n);
+              _context3.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](0);
+              _context3.next = 12;
+              return (0,_fileSystem_init__WEBPACK_IMPORTED_MODULE_8__.alertFromJSX)(_context3.t0);
+
+            case 12:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3);
+      }, _callee3, null, [[0, 8]]);
     }))
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_parts_buttons__WEBPACK_IMPORTED_MODULE_5__.StdButton, {
     name: "load",
@@ -2778,43 +2853,41 @@ var HeaderCompo = function HeaderCompo() {
      * @returns {DocumentType[]}
      */
     _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4() {
-      var connect, n, docs;
+      var connect, docs;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               connect = new _fileSystem_connect__WEBPACK_IMPORTED_MODULE_4__.SendHostScript();
-              _context4.next = 3;
+              _context4.prev = 1;
+              _context4.next = 4;
               return connect.callHostScript({
                 func: 'getDocuments'
               });
 
-            case 3:
-              n = _context4.sent;
+            case 4:
+              docs = _context4.sent;
+              console.log(docs);
+              /*
+                send to redux
+              */
 
-              if (!(n === 'null')) {
-                _context4.next = 8;
-                break;
-              }
+              if (docs.from === 'getDocuments') dispatch((0,_redux_features_documents_documentsSlice__WEBPACK_IMPORTED_MODULE_3__.setDocs)(docs.param));
+              _context4.next = 13;
+              break;
 
-              _context4.next = 7;
-              return (0,_fileSystem_init__WEBPACK_IMPORTED_MODULE_8__.alertFromJSX)('error');
+            case 9:
+              _context4.prev = 9;
+              _context4.t0 = _context4["catch"](1);
+              _context4.next = 13;
+              return (0,_fileSystem_init__WEBPACK_IMPORTED_MODULE_8__.alertFromJSX)(_context4.t0);
 
-            case 7:
-              return _context4.abrupt("return");
-
-            case 8:
-              docs = JSON.parse(n);
-              console.log(docs); // send to redux
-
-              dispatch((0,_redux_features_documents_documentsSlice__WEBPACK_IMPORTED_MODULE_3__.setDocs)(docs));
-
-            case 11:
+            case 13:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4);
+      }, _callee4, null, [[1, 9]]);
     }))
   })));
 };
@@ -3011,9 +3084,27 @@ var SendHostScript = /*#__PURE__*/function () {
     value: function callHostScript(obj) {
       var _this = this;
 
-      return new Promise(function (resolve) {
-        _init__WEBPACK_IMPORTED_MODULE_3__.csInterface.evalScript("".concat(_this.jsx, "(").concat(obj !== undefined ? JSON.stringify(obj) : '', ")"), function (o) {
-          resolve(o);
+      return new Promise(function (resolve, reject) {
+        _init__WEBPACK_IMPORTED_MODULE_3__.csInterface.evalScript("".concat(_this.jsx, "(").concat(JSON.stringify(obj), ")"), function (str) {
+          try {
+            console.log(str);
+            var recieved = JSON.parse(str);
+            console.log(recieved);
+            /*
+            in case of error, status always be failed
+            in any other case, it will be success
+            */
+
+            if (recieved.status === 'failed') throw Error(recieved.msg);
+            /*
+            TypeScript assumes that the recieved value must be success type
+            because in case of failed it throws error
+            */
+
+            resolve(recieved);
+          } catch (e) {
+            reject(e);
+          }
         });
       });
     }

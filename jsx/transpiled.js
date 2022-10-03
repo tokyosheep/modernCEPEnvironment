@@ -14,13 +14,24 @@ exports.__esModule = true;
 exports.callDocument = void 0;
 
 var callDocument = function callDocument() {
-  if (app.documents.length < 1) {
-    alert("there's no any document");
-    return new Error("there's no any document").toString();
-  }
+  try {
+    if (app.documents.length < 1) {
+      alert("there's no any document");
+      throw new Error("there's no any document").toString();
+    }
 
-  alert(app.activeDocument.name);
-  return decodeURI(app.activeDocument.name.toString());
+    alert(app.activeDocument.name);
+    return {
+      status: 'success',
+      param: decodeURI(app.activeDocument.name.toString()),
+      from: 'callDocument'
+    };
+  } catch (e) {
+    return {
+      status: 'failed',
+      msg: e.message
+    };
+  }
 };
 
 exports.callDocument = callDocument;
@@ -61,34 +72,101 @@ var getLayers = function getLayers(activeDoc) {
   ;
   return layers;
 };
+
 /**
  * getting documents and layers data on Illustrator
- * @returns {DocumentType[]}
+ * @returns {ReturnSuccess<DocumentType[], 'getDocuments'>}
  */
-
-
 var getDocumentData = function getDocumentData() {
-  var docs = [];
-  var documents = app.documents;
+  try {
+    var docs = [];
+    var documents = app.documents;
 
-  for (var i = 0; i < documents.length; i++) {
-    app.activeDocument = documents[i];
+    for (var i = 0; i < documents.length; i++) {
+      app.activeDocument = documents[i];
 
-    _log["default"].log(app.activeDocument.name);
+      _log["default"].log(app.activeDocument.name);
 
-    docs[i] = {
-      type: 'document',
-      name: app.activeDocument.name,
-      layers: getLayers(app.activeDocument)
+      docs[i] = {
+        type: 'document',
+        name: app.activeDocument.name,
+        layers: getLayers(app.activeDocument)
+      };
+    }
+
+    ;
+    return {
+      status: 'success',
+      param: docs,
+      from: 'getDocuments'
+    };
+  } catch (e) {
+    return {
+      status: 'failed',
+      msg: e.message
     };
   }
-
-  ;
-  return docs;
 };
 
 var _default = getDocumentData;
 exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./src/inspectPolyfill.ts":
+/*!********************************!*\
+  !*** ./src/inspectPolyfill.ts ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.inspectPolyfill = void 0;
+
+function _objectEntries(obj) {
+  var entries = [];
+  var keys = Object.keys(obj);
+
+  for (var k = 0; k < keys.length; k++) entries.push([keys[k], obj[keys[k]]]);
+
+  return entries;
+}
+
+/**
+ * test for polyfill and babel
+ * @returns {InspectPolyfillReturn}
+ */
+var inspectPolyfill = function inspectPolyfill() {
+  var decimal = 34.2234;
+  var num = 4;
+  var object = {
+    num: num.toString().padStart(2, '0'),
+    integer: Math.trunc(decimal),
+    name: 'object'
+  };
+
+  var array = _objectEntries(object).map(function (_ref) {
+    var key = _ref[0],
+        value = _ref[1];
+    return {
+      key: key,
+      value: value
+    };
+  });
+
+  return {
+    status: 'success',
+    param: {
+      object: object,
+      array: array
+    },
+    from: 'inspectPolyfill'
+  };
+};
+
+exports.inspectPolyfill = inspectPolyfill;
 
 /***/ }),
 
@@ -2193,6 +2271,8 @@ __webpack_require__(/*! ../polyfill/padStart */ "./polyfill/padStart.js");
 
 __webpack_require__(/*! ../polyfill/trunc */ "./polyfill/trunc.js");
 
+var _inspectPolyfill = __webpack_require__(/*! ./inspectPolyfill */ "./src/inspectPolyfill.ts");
+
 var _getDocuments = _interopRequireDefault(__webpack_require__(/*! ./getDocuments */ "./src/getDocuments.ts"));
 
 var _callDocument = __webpack_require__(/*! ./callDocument */ "./src/callDocument.ts");
@@ -2203,19 +2283,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 // padstart polyfill
 // Math.trunc
-_log["default"].log('hello');
-
 var greeting = function greeting(msg) {
   _log["default"].log('greeting');
 
   alert(msg);
+  return {
+    status: 'success',
+    param: null,
+    from: 'greeting'
+  };
 };
+/**
+ * type of value from each function
+ */
+
 
 /**
  * this is function on top level scope.
  * any function must not be declared on global scope.
  * @param {HostScriptArg} arg 
- * @returns {null | string | Error} 
+ * @returns {ReturnFromJSX} 
  * branch to each local function.
  * 
  * I warn you
@@ -2226,28 +2313,23 @@ var switchFuncs = function switchFuncs(arg) {
 
   switch (arg.func) {
     case 'greeting':
-      greeting(arg.msg);
-      return 'null';
+      return greeting(arg.msg);
 
     case 'getDocuments':
-      try {
-        return JSON.stringify((0, _getDocuments["default"])());
-      } catch (e) {
-        alert(e);
-        return 'null';
-      }
-
-      ;
+      return (0, _getDocuments["default"])();
 
     case 'callDocument':
       return (0, _callDocument.callDocument)();
 
+    case 'inspectPolyfill':
+      return (0, _inspectPolyfill.inspectPolyfill)();
+
     case 'error':
-      return JSON.stringify(new Error('error'));
-    // this just returns raw code
+      throw new Error('error');
+    // this just returns Error Object
 
     default:
-      return new Error('invalid param').toString();
+      throw new Error('invalid param');
   }
 };
 /**

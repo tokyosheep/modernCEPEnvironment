@@ -102,3 +102,12 @@ ExtendScript debugger requires declaration of debug level in ExtendScript.
  ` ` `
 $.level = 1;
  ` ` `
+
+### October 3 2022
+
+added polyfills and babels
+1. padstart
+2. Math.trunc
+3. Objectentries
+
+modified type of object from ExtendScript to panel side

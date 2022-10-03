@@ -6,5 +6,16 @@
 function hostScript(arg){
    //declared debug level for ExtendScript debugger
    $.level = 1;
-   return switchFuncs(arg);
+   /*
+   any value from ExtendScript become string
+   including error
+   */
+   try {
+      return JSON.stringify(switchFuncs(arg));
+   } catch (e) {
+      return JSON.stringify({
+         status: 'failed',
+         msg: e.message
+      });
+   };
 }

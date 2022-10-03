@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "babel-loader": "^8.2.5",
+    "babel-plugin-transform-es2017-object-entries": "^0.0.5",
     "types-for-adobe": "^7.0.5",
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
