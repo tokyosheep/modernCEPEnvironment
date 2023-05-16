@@ -1,4 +1,4 @@
-/******/ (function() { // webpackBootstrap
+﻿/******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/callDocument.ts":
@@ -2286,7 +2286,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var greeting = function greeting(msg) {
   _log["default"].log('greeting');
 
-  alert(msg);
+  alert(msg + "こんにちは");
   return {
     status: 'success',
     param: null,

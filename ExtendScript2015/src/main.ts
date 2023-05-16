@@ -57,7 +57,7 @@ to clarify the result of commitment of ExtendScript
 type GreetingReturn = ReturnSuccess<null, 'greeting'>;
 const greeting:(msg:string)=>GreetingReturn = (msg) => {
   report.log('greeting');
-  alert(msg);
+  alert(msg + "こんにちは");
   return {
     status: 'success',
     param: null,

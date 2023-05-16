@@ -13,6 +13,11 @@
 2. TypeScript
 3. Babel
 
+** Note **
+for those users who use Japanese character.
+Japanese character will be garbled (doesn't work).
+so in case, you need webpack-utf8-bom.
+
 ## features of Extension
 
 The Extension just takes documents and layers parts of data.
@@ -111,3 +116,7 @@ added polyfills and babels
 3. Objectentries
 
 modified type of object from ExtendScript to panel side
+
+### May 16 2023
+
+added webpack-utf8-bom plugin for Japanese character (as I mentioned in this article).

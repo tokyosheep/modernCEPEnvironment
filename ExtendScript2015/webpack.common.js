@@ -1,6 +1,12 @@
 const path = require('path');
 
-module.exports = {
+const BomPlugin = require('webpack-utf8-bom');
+
+module.exports.plugins = [
+  new BomPlugin(true)
+];
+
+module.exports.common = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, '../jsx'),
